@@ -9,12 +9,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const {getCartContext} = useContext(CartContext);
 
-  const getCart = async()=>{
-    const res = getCartContext();
-    return(res);
-  }
-  const {data} =useQuery('cart',getCart);
-
   const logout = ()=>{
     localStorage.removeItem('userToken');
     setUserToken(null);
@@ -45,7 +39,11 @@ export default function Navbar() {
             </li>
 
             {userToken&& <li className="nav-item">
-              <Link className='nav-link' to='/cart'>Cart {data?data.count:0}</Link>
+              <Link className='nav-link' to='/cart'>Cart 
+              {async()=>{
+                  const {data} = getCartContext();
+                  return data.count;
+                }}</Link>
             </li>}
           
           

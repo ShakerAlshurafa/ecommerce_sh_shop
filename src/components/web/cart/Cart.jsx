@@ -1,12 +1,10 @@
 import React, { useContext } from 'react'
 import './cart.css'
 import { CartContext } from '../context/Cart'
-import axios from 'axios';
 import { useQuery } from 'react-query';
 
 function Cart() {
-  const {getCartContext} = useContext(CartContext);
-  const {removeItemContext,countCartDecrement} = useContext(CartContext);
+  const {removeItemContext,countCartDecrement,getCartContext} = useContext(CartContext);
 
   const getCart = async()=>{
     const res = getCartContext();
