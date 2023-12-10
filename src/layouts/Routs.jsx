@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <UserProfile />
+        element: <ProtectedRoute protectFor={'profile'}> <UserProfile /> </ProtectedRoute>
       },
       {
         path:'password-recovery',
