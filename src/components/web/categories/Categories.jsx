@@ -28,7 +28,7 @@ export default function Categories() {
 
   return (
     <>
-      <div className='py-3 text-center bg-info'>
+      <div className='categories py-3 text-center bg-info'>
         <h1>All categories</h1>
         <div className="container">
         <div className="swiper-custom-pagination mb-3 mt-4 text-end"></div>

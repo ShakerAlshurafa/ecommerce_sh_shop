@@ -16,7 +16,6 @@ export default function UserContextProvider({children}){
     }
 
     useEffect(()=>{
-        setUserToken(localStorage.getItem('userToken'))
         getUserData();
     },[userToken])
     return <UserContext.Provider value={{userToken,setUserToken,userData,getUserData}}>

@@ -1,0 +1,25 @@
+.profile{
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 112px);
+}
+.profileLinks{
+    background-color: cadetblue;
+    height: 100%;
+    padding-inline: 60px;
+}
+.profileLinks nav{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.profileLinks nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.profileLinks nav a:hover{
+    color: red;
+}

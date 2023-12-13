@@ -1,0 +1,29 @@
+.order{
+    height: calc(100vh - 112px);
+    display: flex;
+    align-items: center;
+}
+.orderLinks{
+    background-color: cadetblue;
+    height: 100%;
+    padding-inline: 40px;
+}
+.orderLinks nav{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.orderLinks nav a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.orderLinks nav a:hover{
+    color: red;
+}
+
+.orderData{
+    margin: auto;
+}

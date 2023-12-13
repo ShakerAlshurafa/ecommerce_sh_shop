@@ -6,7 +6,7 @@ import { CartContext } from '../context/Cart';
 
 function Product() {
     const {productId} = useParams();
-    const {addToCartContext,countCartIncrement} = useContext(CartContext);
+    const {addToCartContext} = useContext(CartContext);
 
     const getProduct = async()=>{
         const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products/${productId}`)
@@ -19,7 +19,6 @@ function Product() {
 
     const addToCart = async(productId)=>{
         const res = await addToCartContext(productId);
-        await countCartIncrement();
         return(res)
     }
 

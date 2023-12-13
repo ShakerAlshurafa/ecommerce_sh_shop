@@ -7,7 +7,7 @@ import { useQuery } from 'react-query';
 export default function Navbar() {
   const {userToken,setUserToken,userData,setUserData} = useContext(UserContext);
   const navigate = useNavigate();
-  const {getCartContext} = useContext(CartContext);
+  const {count} = useContext(CartContext); 
 
   const logout = ()=>{
     localStorage.removeItem('userToken');
@@ -39,13 +39,8 @@ export default function Navbar() {
             </li>
 
             {userToken&& <li className="nav-item">
-              <Link className='nav-link' to='/cart'>Cart 
-              {async()=>{
-                  const {data} = getCartContext();
-                  return data.count;
-                }}</Link>
+              <Link className='nav-link' to='/cart'>Cart <span className='badge bg-success'>{count}</span></Link>
             </li>}
-          
           
           </ul>
           <ul className="navbar-nav">

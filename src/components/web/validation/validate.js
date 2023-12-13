@@ -47,3 +47,10 @@ export const restPasswordSchema = yup.object({
     password : yup.string().required('Password is required').min(6,'At least 6 char').max(20,'Max 20 char'),
     code : yup.string().required('Code is required'),
 })
+
+export const couponSchema = yup.object({
+    couponName: yup.string().min(4,'The code must be 4 char'),
+    email : yup.string().required('Email is required').email('Invalid email'),
+    address : yup.string().required('Address is required'),
+    phone : yup.string().required('Phone is required'),
+})

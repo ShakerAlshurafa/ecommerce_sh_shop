@@ -1,3 +1,6 @@
 .swiper-pagination-bullet{
     background-color: rgba(0, 0, 0, 0.5);
 }
+.categories{
+    height: calc(100vh - 112px);
+}
