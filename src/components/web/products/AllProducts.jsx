@@ -50,9 +50,9 @@ function AllProducts() {
         <div className="row">
         {valid?<>{data.products.map((product)=>
             <div className="product col-lg-4 my-3" key={product._id}>
-                <div className="card p-2">
-                    <img src={product.mainImage.secure_url} className='w-50' alt="" />
-                    <h2>{product.name}</h2>
+                <div className="card h-100 pb-3 d-flex flex-column justify-content-center align-items-center">
+                    <img src={product.mainImage.secure_url} className='w-75 mb-4' alt="" />
+                    <h5>{product.name}</h5>
                     <Link to={`/products/${product._id}`}>details</Link>
                 </div>
             </div>
