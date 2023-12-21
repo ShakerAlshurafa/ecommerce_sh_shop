@@ -11,7 +11,7 @@ function Order() {
         <div className={`${style.orderLinks}`}>
             <nav>
                 <Link to='addOrder'>Add Order</Link>
-                <Link to='getOrder'>Get Orders</Link>
+                <Link to='getOrder'>Your Orders</Link>
             </nav>
         </div>
         <div className={`${style.orderData}`}>

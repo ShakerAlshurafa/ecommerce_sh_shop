@@ -1,8 +1,11 @@
 import axios from 'axios'
 import React, { useContext } from 'react'
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { CartContext } from '../context/Cart';
+import style from './Products.module.css'
+import { FaRegStar, FaStar } from "react-icons/fa";
+import Rating from 'react-rating';
 
 function Product() {
     const {productId} = useParams();
@@ -22,6 +25,11 @@ function Product() {
         return(res)
     }
 
+    // let stars = [false];
+    const getRating = (rating)=>{
+        return Array(5).fill().map((e,i)=>{return i<Math.floor(rating)})
+    }
+    // console.log(data)
   return (
     <div className='container'>
         {data?
@@ -35,10 +43,34 @@ function Product() {
                         )}            
                     </div>
                 </div>
-                <div className="col-lg-8 text-center">
+                <div className="col-lg-8 pb-2">
                     <h2>{data.name}</h2>
-                    <p>{data.price}</p>
+                    <p>Price: <del>${data.price}</del> <span className='text-success fw-bold'>${data.finalPrice}</span></p>
                     <button className='btn btn-outline-primary' onClick={()=>addToCart(data._id)}>Add To Cart</button>
+                    <Link className='btn btn-outline-primary ms-2' to={`/addReviews/${data._id}`}>Add Review</Link>
+                    <hr />
+                </div>
+                <div className="col-lg-4">
+                    <img className='img-thumbnail mx-auto w-75' src={data.mainImage.secure_url} />
+                </div>
+                <div className='text-center col-lg-8'>
+                    <div className={`overflow-y-scroll bg-info bg-opacity-50 mx-auto mt-4 p-2 ${style.comments}`}>
+                        <h3 className='mb-2 fw-bold'>Comments</h3>
+                        {data.reviews.map((review)=>{
+                        return(
+                            <div className="comment mt-3 bg-info bg-opacity-25 py-2" key={review._id}>
+                                {/* {console.log(review)} */}
+                                <h6>{review.comment}</h6>
+                                
+                                    {
+                                        getRating(review.rating).map((star,j)=>(<span>
+                                            {j<=review.rating ? <FaStar color='orange'/> :<FaRegStar color='black'/>}
+                                       </span> ))
+                                    }
+                                
+                            </div>
+                        )
+                    })}</div>
                 </div>
             </div>
             :<h2>no product</h2>

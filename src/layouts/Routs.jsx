@@ -20,6 +20,8 @@ import UserContact from '../components/web/profile/UserContact.jsx';
 import Order from '../components/web/order/Order.jsx';
 import GetOrder from '../components/web/order/GetOrder.jsx';
 import AddOrder from '../components/web/order/AddOrder.jsx';
+import AllProducts from '../components/web/products/AllProducts.jsx';
+import AddReviews from '../components/web/reviews/AddReviews.jsx';
 
 export const router = createBrowserRouter([
   {
@@ -86,12 +88,20 @@ export const router = createBrowserRouter([
         ]
       },
       {
+        path: 'addReviews/:productId',
+        element: <AddReviews />
+      },
+      {
         path:'password-recovery',
         element: <PasswordRecovery />
       },
       {
         path: 'password-rest',
         element: <PasswordRest />
+      },
+      {
+        path: 'products',
+        element:  <AllProducts /> ,
       },
       {
         path: '*',

@@ -54,3 +54,8 @@ export const couponSchema = yup.object({
     address : yup.string().required('Address is required'),
     phone : yup.string().required('Phone is required'),
 })
+
+export const reviewSchema = yup.object({
+    comment: yup.string(),
+    rating: yup.number(),
+})

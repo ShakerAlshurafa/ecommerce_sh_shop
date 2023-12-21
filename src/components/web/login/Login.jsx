@@ -58,7 +58,7 @@ export default function Login() {
     ];
 
     const renderInputs = inputs.map((input,index)=>
-    <div className="form-group">
+    <div className="form-group" key={index}>
         <Input 
         type={input.type} id={input.id} name={input.name} title={input.title} value={input.value}
         onChange={formik.handleChange} 
@@ -78,6 +78,7 @@ export default function Login() {
                         <div className="card-header">
                             <h2 className="text-center">Login</h2>
                         </div>
+
                         <div className="card-body pb-5">
                             <form onSubmit={formik.handleSubmit} className='m-auto w-50'>
                                 {renderInputs}     
