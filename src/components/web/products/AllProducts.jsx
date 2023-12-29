@@ -2,82 +2,91 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import style from './Products.module.css'
+import { FaRegStar, FaStar } from 'react-icons/fa';
 
 function AllProducts() {    
 
     const [currentPage, setCurrentPage] = useState(1);
-    // const [nextPage, setNextPage] = useState(null);
-    // const [previousPage, setPreviousPage] = useState(null);
-    const [valid, setValid] = useState(false);
 
     const pageNumber = (page=1)=>{
-        setCurrentPage(page);
-        // if(page<data.page)
-        //     setNextPage(page+1);
-        // if(page>1)
-        //     setPreviousPage(page-1);
         if(page>data.page)
-            pageNumber(data.page)
-        if(page<1)
-            pageNumber(1);
-        e.preventDefault();
+            setCurrentPage(data.page)
+        else if(page<1)
+            setCurrentPage(1);
+        else
+            setCurrentPage(page);
     }
     
     const getProducts = async()=>{
         const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products?page=${currentPage}`)
-        {data?setValid(true):setValid(false)}
         return(data);
     }
 
-    useEffect(()=>{
-        getProducts();
-    },[currentPage])
-
+    
     const {data,isLoading} = useQuery('category_details',getProducts);
     if(isLoading){
         return(
             <p>...loading</p>
         )
     }
-
+        
 
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(data.total/data.products.length) ; i++) {
-        pageNumbers.push(i);
+    if(data.products)
+        for (let i = 1; i <= Math.ceil(data.total/data.products.length) ; i++) {
+            pageNumbers.push(i);
+        }
+
+    const getRating = (rating)=>{
+        return Array(5).fill().map((e,i)=>{return i<Math.floor(rating)})
     }
   return (
-    <div className='products container'>
-        <div className="row">
-        {valid?<>{data.products.map((product)=>
-            <div className="product col-lg-4 my-3" key={product._id}>
-                <div className="card h-100 pb-3 d-flex flex-column justify-content-center align-items-center">
-                    <img src={product.mainImage.secure_url} className='w-75 mb-4' alt="" />
-                    <h5>{product.name}</h5>
-                    <Link to={`/products/${product._id}`}>details</Link>
-                </div>
-            </div>
-        )}
+    <div className={`${style.products}`}>
+
+        <div className="container mx-auto mt-2">
+            <div className="row">
+                {data?.products?<>{data.products.map((product)=>
+                    <div className="col-md-3 mt-3">
+                        {/* {console.log(product)} */}
+                        <div className={`${style.card} w-100`}>
+                            <img src={product.mainImage.secure_url} className={`${style.cardImg} w-100 mb-2`} alt="" />
+                            <div className={`${style.cardBody} d-flex flex-column justify-content-center position-relative text-center`}>
+                                <div className={`${style.line}`}>
+                                    <h5 className={`${style.lineUp} card-title`}>{product.name}</h5>
+                                    <div className={`${style.lineUp} rating`}>
+                                        {
+                                            getRating(product.avgRating).map((star,j)=>(<span>
+                                                {star ? <FaStar color='orange'/> :<FaRegStar color='black'/>}
+                                            </span> ))
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <Link to={`/products/${product._id}`} className={`${style.btn} d-block text-center`}>details</Link>
+                        </div>
+                    </div>    
+                )}
+                <nav aria-label="Page navigation" className="d-flex justify-content-center my-2">
+                    <ul className="pagination">
+                        <li className="page-item">
+                            <a className="page-link btn"  onClick={()=>pageNumber(currentPage-1)} aria-label="Previous">
+                                <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        {pageNumbers.map((number) => (
+                            <li className={currentPage==number?"active page-item":"page-item"} key={number}><a className="page-link btn" onClick={()=>pageNumber(number)}>{number}</a></li>
+                        ))}
         
-        <nav aria-label="Page navigation" className="d-flex justify-content-center my-3">
-            <ul className="pagination">
-                <li className="page-item">
-                    <a className="page-link"  onClick={()=>pageNumber(currentPage-1)} aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                    </a>
-                </li>
-                {pageNumbers.map((number) => (
-                    <li className="page-item" key={number}><a className="page-link" onClick={()=>pageNumber(number)}>{number}</a></li>
-                ))}
-
-                <li className="page-item">
-                    <a className="page-link" onClick={()=>pageNumber(currentPage+1)} aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        </>:<h2>no product</h2>}
+                        <li className="page-item">
+                            <a className="page-link btn" onClick={()=>pageNumber(currentPage+1)} aria-label="Next">
+                                <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                </>:<h2>no product</h2>}
+            </div>
         </div>
     </div>
   )

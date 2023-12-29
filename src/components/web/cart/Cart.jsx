@@ -2,35 +2,36 @@ import React, { useContext, useEffect, useState } from 'react'
 import './cart.css'
 import { CartContext } from '../context/Cart'
 import { useQuery } from 'react-query';
-import { useFormik } from 'formik';
-import { couponSchema } from '../validation/validate';
-import Input from '../../pages/Input';
-import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
+import './../../../index.css'
+
 
 function Cart() {
   const {removeItemContext,getCartContext,clearCartContext,increaseQuantityCart,decreaseQuantityCart} = useContext(CartContext);
  
 
-
+  
+  const [loading,setLoading] = useState(false); 
   const getCart = async()=>{
     const res = getCartContext();
-    setLoading(false);
     return res;
   }
-
-  const [loading,setLoading] = useState(false); //not complete 
+  if(loading){
+    return <div className="loading-spinner">
+    <div className="spinner-border m-5" role="status">
+      <span className="sr-only" />
+    </div>  
+  </div>
+  }
 
   const removeFromCart = async(productId)=>{
     await removeItemContext(productId);
-  }
-  if(loading){
-    <span class="loader"></span>
   }
 
   const increaseCart = async(productId)=>{
     await increaseQuantityCart(productId);
     await getCart();
+    // setLoading(false);
   }
   const decreaseCart = async(productId)=>{
     await decreaseQuantityCart(productId);
@@ -47,13 +48,17 @@ function Cart() {
       return sum;
   }
 
-  const {data,isLoading} = useQuery('cart',getCart);
-  if(isLoading){
-    return <div>loading...</div>;
-  }
-
   const clearCart= async()=>{
     await clearCartContext();
+  }
+
+  const {data,isLoading} = useQuery('cart',getCart);
+  if(isLoading){
+    return <div className="loading-spinner">
+    <div className="spinner-border m-5" role="status">
+      <span className="sr-only" />
+    </div>  
+  </div>
   }
   return (
 
@@ -83,7 +88,6 @@ function Cart() {
                     <img src= {product.details.mainImage.secure_url} />
                     <div className="product-details">
                       <h2>{product.details.name}</h2>
-                      <span>Color:black</span>
                       <button onClick={()=>removeFromCart(product.details._id)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -202,3 +206,12 @@ function Cart() {
 }
 
 export default Cart
+function renderLoadingSpinner() {
+  return (
+    <div className="loading-spinner">
+      <div className="spinner-border m-5" role="status">
+        <span className="sr-only" />
+      </div>
+    </div>
+  );
+}

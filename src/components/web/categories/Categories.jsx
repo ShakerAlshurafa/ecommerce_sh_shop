@@ -28,8 +28,8 @@ export default function Categories() {
 
   return (
     <>
-      <div className='categories py-3 text-center bg-info'>
-        <h1>All categories</h1>
+      <div className='categories py-5 text-center bg-info'>
+        {/* <h1>All categories</h1> */}
         <div className="container">
         <div className="swiper-custom-pagination mb-3 mt-4 text-end"></div>
           <Swiper

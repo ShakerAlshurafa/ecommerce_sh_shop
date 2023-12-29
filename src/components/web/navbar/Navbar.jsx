@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/User';
 import { CartContext } from '../context/Cart';
-import { useQuery } from 'react-query';
+import style from './Navbar.module.css'
 
 export default function Navbar() {
   const {userToken,setUserToken,userData,setUserData} = useContext(UserContext);
@@ -19,7 +19,10 @@ export default function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container">
-        <a className="navbar-brand" href="#">SH-Shop</a>
+          <div className={`${style.logo}`}>
+            <a className="navbar-brand" href="#">SH-Shop</a>
+            <a className="navbar-brand" href="#">SH-Shop</a>
+          </div>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>

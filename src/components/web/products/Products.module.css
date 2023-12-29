@@ -1,4 +1,83 @@
 .comments{
-    width: 500px;
-    height: 300px;
+    height: 400px;
 }
+
+:root {
+  --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
+}
+
+.products {
+  background-image: url(image/R.jpg) !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: calc(100vh - 112px);
+}
+
+.card {
+  background: #222;
+  border: 1px solid #dd2476;
+  color: rgba(250, 250, 250, 0.8);
+  margin-bottom: 2rem;
+  /* height: 470px; */
+}
+.card .cardImg{
+    height: 330px;
+}
+.cardBody{
+  height: 110px;
+}
+.card:hover .cardImg{
+    border: 1px red solid;
+}
+.btn {
+  width: 100%;
+  border: 5px solid;
+  padding: 2px;
+  border-image-slice: 1;
+  background: var(--gradient) !important;
+  background-clip:text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  border-image-source:  var(--gradient) !important; 
+  text-decoration: none;
+  transition: all .4s ease;
+}
+
+.btn:hover, .btn:focus {
+  background: var(--gradient) !important;
+  background-clip:none !important;
+  -webkit-background-clip: none !important;
+  -webkit-text-fill-color: #fff !important;
+  border: 5px solid #fff !important;
+  box-shadow: #222 1px 0 10px;
+  text-decoration: underline;
+}
+
+/* product title */
+.line {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+  }
+  /* lineup class and keyframes */
+.lineUp {
+    animation: 2s anim-lineUp ease-out;
+    -webkit-animation: 2s anim-lineUp ease-out;
+}
+  @keyframes anim-lineUp {
+    0% {
+      opacity: 0;
+      transform: translateY(80%);
+    }
+    20% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }

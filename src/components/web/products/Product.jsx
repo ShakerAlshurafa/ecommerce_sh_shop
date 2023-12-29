@@ -43,14 +43,14 @@ function Product() {
                         )}            
                     </div>
                 </div>
-                <div className="col-lg-8 pb-2">
+                <div className="col-lg-8 text-white pb-2">
                     <h2>{data.name}</h2>
-                    <p>Price: <del>${data.price}</del> <span className='text-success fw-bold'>${data.finalPrice}</span></p>
+                    <p>Price: {data.price==0?<><del>${data.price}</del><span className='text-success fw-bold'>${data.finalPrice}</span></>:<span>${data.finalPrice}</span>} </p>
                     <button className='btn btn-outline-primary' onClick={()=>addToCart(data._id)}>Add To Cart</button>
                     <Link className='btn btn-outline-primary ms-2' to={`/addReviews/${data._id}`}>Add Review</Link>
                     <hr />
                 </div>
-                <div className="col-lg-4">
+                <div className="col-lg-4 mt-4">
                     <img className='img-thumbnail mx-auto w-75' src={data.mainImage.secure_url} />
                 </div>
                 <div className='text-center col-lg-8'>
@@ -64,7 +64,7 @@ function Product() {
                                 
                                     {
                                         getRating(review.rating).map((star,j)=>(<span>
-                                            {j<=review.rating ? <FaStar color='orange'/> :<FaRegStar color='black'/>}
+                                            {star ? <FaStar color='orange'/> :<FaRegStar color='black'/>}
                                        </span> ))
                                     }
                                 

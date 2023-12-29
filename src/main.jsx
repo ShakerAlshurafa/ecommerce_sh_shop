@@ -5,6 +5,7 @@ import './index.css'
 import { QueryClient ,QueryClientProvider } from 'react-query'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 import UserContextProvider from './components/web/context/User.jsx'
