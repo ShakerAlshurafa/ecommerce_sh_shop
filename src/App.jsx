@@ -13,7 +13,7 @@ export default function App() {
       setUserToken(localStorage.getItem('userToken'));
       setCount(getCartContext().count);
     }
-  },[])
+  },[localStorage.getItem('userToken')])
   return (
   <RouterProvider router={router} />
   )
